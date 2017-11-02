@@ -54,9 +54,8 @@ addToDoForm.addEventListener('submit', event => {
 
     });
 
-
+}
 
 window.onload = function() {
                 onReady();
  };
-}
