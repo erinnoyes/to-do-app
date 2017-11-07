@@ -1,62 +1,65 @@
 function onReady() {
+    let toDos = [];
     const addToDoForm = document.getElementById('addToDoForm');
-    const newToDoText = document.getElementById('newToDoText');
-    const toDoList = document.getElementById('toDoList');
 
 
+    function createNewToDo() {
+        const newToDoText = document.getElementById('newToDoText');
+        if (!newToDoText.value) {
+            return;
+        }
+        toDos.push({
+            title: newToDoText.value,
+            complete: false
+        });
+        newToDoText.value = '';
+        renderTheUI(toDos);
+    }
 
-
-addToDoForm.addEventListener('submit', event => {
+    addToDoForm.addEventListener('submit', event => {
         event.preventDefault();
+        createNewToDo();
+    });
 
-        // get the text
-        let title = newToDoText.value;
+    renderTheUI(toDos);
 
-        // create a new li
-        let newLi = document.createElement('li');
 
-        // create a new input
-        let checkbox = document.createElement('input');
 
-        // set the input's type to checkbox
+
+
+
+
+function renderTheUI(toDos) {
+    const todoList = document.getElementById('toDoList');
+
+    toDoList.textContent = '';
+
+
+    toDos.forEach(function(toDo) {
+        const newLi = document.createElement('li');
+        const checkbox = document.createElement('input');
         checkbox.type = "checkbox";
-
-        //create a new input
-        const button = document.createElement('button');
-
-        //set button's id to button
-        button.id = "button"
-
-        //set button text to "Delete"
+        let button = document.createElement('button');
+        button.id = 'button';
         button.textContent = "Delete";
 
-        //add event listener for button
-        button.addEventListener('click', event => {
-        toDoList.removeChild(newLi);
-        });
+        newLi.textContent = toDo.title;
 
-
-        // set the title
-        newLi.textContent = title;
-
-        // attach the checkbox to the li
+        todoList.appendChild(newLi);
         newLi.appendChild(checkbox);
-
-         //attach the button to the checkbox
         newLi.appendChild(button);
 
-        // attach the li to the ul
-        toDoList.appendChild(newLi);
 
-        //empty the input
-        newToDoText.value = '';
 
 
     });
 
+}
+
+
+}
 
 
 window.onload = function() {
-                onReady();
- };
-}
+    onReady();
+};
