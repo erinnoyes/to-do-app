@@ -16,6 +16,11 @@ function onReady() {
         renderTheUI(toDos);
     }
 
+    function removeToDo(title) {
+    toDos = toDos.filter(toDo => toDo.title !== title);
+    renderTheUI(toDos);
+    };
+
     addToDoForm.addEventListener('submit', event => {
         event.preventDefault();
         createNewToDo();
@@ -51,6 +56,11 @@ function renderTheUI(toDos) {
 
 
 
+
+        button.addEventListener('click', event => {
+        removeToDo(toDo.title);
+
+      });
 
     });
 
